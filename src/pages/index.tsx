@@ -10,7 +10,7 @@ export default function Home() {
 
       <p>Você não possui uma sessão ativa no momento</p>
 
-      <div>
+      <div className={styles.content}>
         <WhatsappLogo size={96} color="#292929" weight="light" />
       </div>
 

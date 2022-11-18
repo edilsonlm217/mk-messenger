@@ -14,6 +14,13 @@
     font-weight: 300; // light
   }
 
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+  }
+
   .btnGenQrCode {
     padding: 10px;
     border-radius: 4px;
