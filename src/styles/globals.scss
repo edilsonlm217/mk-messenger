@@ -4,7 +4,32 @@
   box-sizing: border-box;
 }
 
-:root {}
+:root {
+  --border-radius--default: 0.25rem;
+  --border-radius--Button: 31.25rem;
+  --border-radius-none: 0;
+  --border-radius-xs: 0.25rem;
+  --border-radius-sm: 0.5rem;
+  --border-radius-md: 1rem;
+  --border-radius-lg: 1.5rem;
+  --border-radius-pill: 31.25rem;
+  --border-radius-circle: 50%;
+
+  --text-color-Button--primary: #FFFFFF;
+  --text-color-Button-hover--primary: #FFFFFF;
+  --text-color-Button--secondary: #3273DC;
+  --text-color-Button-hover--secondary: #FFFFFF;
+
+  --background-color-Button--primary: #1962d6;
+  --background-color-Button-hover--primary: #3273DC;
+  --background-color-Button--secondary: #FFFFFF;
+  --background-color-Button-hover--secondary: #3273DC;
+  
+  --border-color-Button--primary: #3273DC;
+  --border-color-Button-hover--primary: #4d4d4d;
+  --border-color-Button--secondary: #3273DC;
+  --border-color-Button-hover--secondary: #3273DC;
+}
 
 body {
   background-color: #F2F2F2;
