@@ -1,4 +1,7 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    
     width: 500px;
     border-radius: var(--border-radius-lg);
     padding: 2rem;

@@ -3,12 +3,12 @@ import React from 'react';
 import styles from './styles.module.scss';
 
 interface ComponentProps {
-    children: JSX.Element
+    children: JSX.Element | JSX.Element[]
 }
 
-const BigWhiteCard: React.FC<ComponentProps> = (props) => {
+const BigWhiteCard: React.FC<ComponentProps & React.HTMLProps<HTMLDivElement>> = (props) => {
     return (
-        <div id="big-white-card" className={styles.container}>
+        <div id={props.id} className={styles.container}>
             {props.children}
         </div>
     );
