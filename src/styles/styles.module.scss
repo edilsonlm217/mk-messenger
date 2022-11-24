@@ -1,4 +1,26 @@
 .pageContainer {
   display: flex;
   justify-content: center;
+
+  .cardHeading {
+    align-self: center;
+    
+    span:first-child {
+      color: #EC268F;
+    }
+
+    span:nth-child(2) {
+      color: #03F463;
+    }
+
+    span:nth-child(3) {
+      color: #0B5C93;
+    }
+  }
+
+  .text {
+    align-self: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
 }
