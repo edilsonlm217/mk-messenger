@@ -8,7 +8,7 @@ interface ButtonProps {
     secondary?: boolean
 }
 
-const Button: React.FC<ButtonProps> = (props) => {
+const Button: React.FC<ButtonProps & React.HTMLProps<HTMLButtonElement>> = (props) => {
     if (props.primary || (!props.primary && !props.secondary)) {
         return (
             <button className={`${styles.btn} ${styles.btnPrimary}`}>
