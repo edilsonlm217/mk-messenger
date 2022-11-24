@@ -2,25 +2,41 @@
   display: flex;
   justify-content: center;
 
-  .cardHeading {
-    align-self: center;
+  .bigWhiteCard {
+    justify-content: center;
     
-    span:first-child {
-      color: #EC268F;
+    .cardHeading {
+      margin-bottom: 2rem;
+      align-self: center;
+
+      span:first-child {
+        color: #EC268F;
+      }
+
+      span:nth-child(2) {
+        color: #03F463;
+      }
+
+      span:nth-child(3) {
+        color: #0B5C93;
+      }
     }
 
-    span:nth-child(2) {
-      color: #03F463;
+    .text {
+      align-self: center;
     }
 
-    span:nth-child(3) {
-      color: #0B5C93;
+    .whatsappLogo {
+      align-self: center;
+      margin-top: 4rem;
+      margin-bottom: 4rem;
     }
-  }
 
-  .text {
-    align-self: center;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+    .startBtn {
+      align-self: center;
+      margin-top: 3rem;
+      min-width: 300px;
+      max-width: 300px;
+    }
   }
 }
