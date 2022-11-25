@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import BigWhiteCard from '../components/BigWhiteCard';
 import Heading from '../components/Heading';
 import Button from '../components/Button';
@@ -8,6 +10,12 @@ import { WhatsappLogo } from 'phosphor-react';
 import styles from '../styles/styles.module.scss';
 
 export default function Home() {
+  const router = useRouter();
+
+  function goToLoginPage(): void {
+    router.push("/login");
+  }
+
   return (
     <div id="home" className={styles.pageContainer}>
       <BigWhiteCard id="big-white-card" className={styles.bigWhiteCard}>
@@ -31,7 +39,7 @@ export default function Home() {
         </Text>
 
         <div className={styles.startBtn}>
-          <Button>Começar</Button>
+          <Button onClick={goToLoginPage}>Começar</Button>
         </div>
       </BigWhiteCard>
     </div >
