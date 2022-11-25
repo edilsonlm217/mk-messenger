@@ -5,10 +5,15 @@
 
   .bigWhiteCard {
     justify-content: center;
-    
+
+    @media screen and (max-width: 768px) {
+      box-shadow: none;
+    }
+
     .cardHeading {
       margin-bottom: 2rem;
       align-self: center;
+      text-align: center;
 
       span:first-child {
         color: #EC268F;
@@ -25,6 +30,7 @@
 
     .text {
       align-self: center;
+      text-align: center;
     }
 
     .whatsappLogo {
