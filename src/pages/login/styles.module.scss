@@ -1,0 +1,48 @@
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+
+    .bigWhiteCard {
+        justify-content: center;
+
+        @media screen and (max-width: 768px) {
+            box-shadow: none;
+        }
+
+        .header {
+            display: flex;
+
+            .arrowLeft {
+                cursor: pointer;
+            }
+            
+            .title {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        .text {
+            text-align: center;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            .submitBtn {
+                margin-top: 2rem;
+            }
+        }
+
+        .link {
+            text-decoration: underline;
+            margin-top: 2rem;
+            text-align: center;
+        }
+    }
+}
