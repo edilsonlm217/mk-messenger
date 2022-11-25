@@ -1,0 +1,39 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .label {
+        font-size: var(--font-size-xxxs);
+        color: var(--color-Input-label);
+        line-height: 10px;
+    }
+
+    input {
+        padding: 0.5rem;
+        border: 1px solid;
+        border-radius: var(--border-radius--default);
+    }
+
+    small {
+        font-size: var(--font-size-xxxs);
+    }
+}
+
+.inputAttentionField {
+    .label {
+        color: var(--color-Input--attention);
+    }
+
+    input {
+        border: 1px solid var(--color-Input--attention);
+
+        &::placeholder {
+            color: var(--color-Input--attention);
+        }
+    }
+
+    small {
+        color: var(--color-Input--attention);
+    }
+}
