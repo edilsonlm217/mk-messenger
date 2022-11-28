@@ -20,6 +20,8 @@ const Input: React.FC<InputProps & React.HTMLProps<HTMLInputElement>> = (props) 
                     placeholder="Informe sua senha"
                     required
                     autoComplete="current-password"
+                    onChange={props.onChange}
+                    onClick={props.onClick}
                 />
                 {props.haserror &&
                     <small>Por favor, preencha este campo corretamente.</small>
@@ -36,8 +38,10 @@ const Input: React.FC<InputProps & React.HTMLProps<HTMLInputElement>> = (props) 
                     id="text"
                     type="text"
                     placeholder={!props.placeholder ? "Texto" : props.placeholder}
-                    required={props.required}
+                    required
                     autoComplete="username"
+                    onChange={props.onChange}
+                    onClick={props.onClick}
                 />
                 {props.haserror &&
                     <small>Por favor, preencha este campo corretamente.</small>
