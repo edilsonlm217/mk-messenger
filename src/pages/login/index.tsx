@@ -1,20 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { ArrowLeft } from 'phosphor-react';
+
+import axios from 'axios';
+
 import Text from '../../components/Text';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 import Heading from '../../components/Heading';
 import BigWhiteCard from '../../components/BigWhiteCard';
 
-
 import styles from './styles.module.scss';
-import Button from '../../components/Button';
-import { useRouter } from 'next/router';
 
 const Login: React.FC = () => {
+    const [login, setLogin] = useState("");
+    const [pwd, setPwd] = useState("");
+    const [loginHasError, setLoginHasError] = useState(false);
+    const [pwdHasError, setPwdHasError] = useState(false);
+
     const router = useRouter();
 
     function handleBackToHome(): void {
         router.back();
+    }
+
+    function handleLoginOnChange(e: React.FormEvent<HTMLInputElement>): void {
+        setLogin(e.currentTarget.value);
+    }
+
+    function handlePwdOnChange(e: React.FormEvent<HTMLInputElement>): void {
+        setPwd(e.currentTarget.value);
+    }
+
+    async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+        e.preventDefault();
+        try {
+            const options = {
+                method: 'POST',
+                url: 'http://localhost:3333/auth',
+                headers: { 'Content-Type': 'application/json' },
+                data: { login: login, password: pwd }
+            };
+            const response = await axios(options);
+            const user = response.data;
+            // Salvar dados do usuário no localStorage
+            // Navegá-lo para carregamento do QR Code
+        } catch (error) {
+            if (error instanceof Error && error.message.includes("401")) {
+                alert('Usuário ou senha inválidos');
+                setLoginHasError(true);
+                setPwdHasError(true);
+            }
+        }
+    }
+
+    function handleInputOnClick(field: string) {
+        if (field === 'login' && loginHasError) {
+            setLoginHasError(false);
+        }
+
+        if (field === 'pwd' && pwdHasError) {
+            setPwdHasError(false);
+        }
     }
 
     return (
@@ -35,14 +82,21 @@ const Login: React.FC = () => {
                     Informe seus dados de login para gerar o QRCODE
                 </Text>
 
-                <form>
+                <form onSubmit={handleFormSubmit}>
                     <Input
-                        haserror={false}
+                        onChange={handleLoginOnChange}
+                        haserror={loginHasError}
                         placeholder="Informe seu login"
                         label="Login"
+                        onClick={() => handleInputOnClick("login")}
                     />
 
-                    <Input password={true} haserror={false} />
+                    <Input
+                        password
+                        onChange={handlePwdOnChange}
+                        haserror={pwdHasError}
+                        onClick={() => handleInputOnClick("pwd")}
+                    />
 
                     <div className={styles.submitBtn}>
                         <Button>Gerar QRCODE</Button>
