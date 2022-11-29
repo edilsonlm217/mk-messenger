@@ -7,11 +7,13 @@ import styles from './styles.module.scss';
 const Qrcode: React.FC = () => {
     const router = useRouter();
 
-    useEffect(() => {
+    useEffect(() => { redirectIfSessionNameDoesNotExist() }, []);
+
+    function redirectIfSessionNameDoesNotExist(): void {
         if (!LocalStorage.sessionNameExists()) {
             router.push("/login");
         }
-    }, []);
+    }
 
     return (
         <h1>QRCode works!</h1>
