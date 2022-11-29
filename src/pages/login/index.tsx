@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { ArrowLeft } from 'phosphor-react';
+import LocalStorage from '../../services/LocalStorage';
 
 import axios from 'axios';
 
@@ -11,6 +12,15 @@ import Heading from '../../components/Heading';
 import BigWhiteCard from '../../components/BigWhiteCard';
 
 import styles from './styles.module.scss';
+
+interface UserCredentials {
+    id: string
+    cnpj: string
+    createdAt: string
+    name: string
+    sessionName: string
+    updatedAt: string
+}
 
 const Login: React.FC = () => {
     const [login, setLogin] = useState("");
@@ -42,9 +52,11 @@ const Login: React.FC = () => {
                 data: { login: login, password: pwd }
             };
             const response = await axios(options);
-            const user = response.data;
-            // Salvar dados do usuário no localStorage
-            // Navegá-lo para carregamento do QR Code
+            const user: UserCredentials = response.data.user;
+            LocalStorage.setItem("client-name", user.name);
+            LocalStorage.setItem("client-cnpj", user.cnpj);
+            LocalStorage.setItem("client-session-name", user.sessionName);
+            router.push("/qrcode");
         } catch (error) {
             if (error instanceof Error && error.message.includes("401")) {
                 alert('Usuário ou senha inválidos');
