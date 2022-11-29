@@ -8,14 +8,10 @@ const Qrcode: React.FC = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if (!sessionNameExists()) {
+        if (!LocalStorage.sessionNameExists()) {
             router.push("/login");
         }
     }, []);
-
-    function sessionNameExists(): boolean {
-        return LocalStorage.getItem("client-session-name") ? true : false;
-    }
 
     return (
         <h1>QRCode works!</h1>
