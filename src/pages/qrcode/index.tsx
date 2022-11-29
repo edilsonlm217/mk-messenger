@@ -14,7 +14,7 @@ const Qrcode: React.FC = () => {
     }, []);
 
     function sessionNameExists(): boolean {
-        return LocalStorage.getItem("user-session-name") ? true : false;
+        return LocalStorage.getItem("client-session-name") ? true : false;
     }
 
     return (
