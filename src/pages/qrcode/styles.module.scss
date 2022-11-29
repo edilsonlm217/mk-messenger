@@ -1,0 +1,41 @@
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+
+    .bigWhiteCard {
+        justify-content: center;
+
+        @media screen and (max-width: 768px) {
+            box-shadow: none;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .text {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .qrCodeContainer {
+            align-self: center;
+            border: 1px solid red;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+
+            img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        .cancelOperationBtn {
+            align-self: center;
+            margin-bottom: 3rem;
+            min-width: 300px;
+            max-width: 300px;
+        }
+    }
+}
