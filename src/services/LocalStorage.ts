@@ -12,6 +12,10 @@ class LocalStorage {
     public removeItem(keyName: string) {
         window.localStorage.removeItem(keyName);
     }
+
+    public sessionNameExists(): boolean {
+        return this.getItem("client-session-name") ? true : false;
+    }
 }
 
 export default new LocalStorage();
