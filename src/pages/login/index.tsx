@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ArrowLeft } from 'phosphor-react';
 import LocalStorage from '../../services/LocalStorage';
@@ -30,6 +30,12 @@ const Login: React.FC = () => {
 
     const router = useRouter();
 
+    useEffect(() => {
+        if (LocalStorage.sessionNameExists()) {
+            router.push("/qrcode");
+        }
+    }, []);
+
     function handleBackToHome(): void {
         router.back();
     }
@@ -40,6 +46,16 @@ const Login: React.FC = () => {
 
     function handlePwdOnChange(e: React.FormEvent<HTMLInputElement>): void {
         setPwd(e.currentTarget.value);
+    }
+
+    function handleInputOnClick(field: string) {
+        if (field === 'login' && loginHasError) {
+            setLoginHasError(false);
+        }
+
+        if (field === 'pwd' && pwdHasError) {
+            setPwdHasError(false);
+        }
     }
 
     async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
@@ -66,15 +82,7 @@ const Login: React.FC = () => {
         }
     }
 
-    function handleInputOnClick(field: string) {
-        if (field === 'login' && loginHasError) {
-            setLoginHasError(false);
-        }
 
-        if (field === 'pwd' && pwdHasError) {
-            setPwdHasError(false);
-        }
-    }
 
     return (
         <div id="login" className={styles.pageContainer}>
