@@ -30,11 +30,7 @@ const Login: React.FC = () => {
 
     const router = useRouter();
 
-    useEffect(() => {
-        if (LocalStorage.sessionNameExists()) {
-            router.push("/qrcode");
-        }
-    }, []);
+    useEffect(() => { redirectIfSessionNameExists() }, []);
 
     function handleBackToHome(): void {
         router.back();
@@ -82,7 +78,11 @@ const Login: React.FC = () => {
         }
     }
 
-
+    function redirectIfSessionNameExists(): void {
+        if (LocalStorage.sessionNameExists()) {
+            router.push("/qrcode");
+        }
+    }
 
     return (
         <div id="login" className={styles.pageContainer}>
