@@ -33,17 +33,15 @@
       text-align: center;
     }
 
-    .whatsappLogo {
-      align-self: center;
-      margin-top: 4rem;
-      margin-bottom: 4rem;
-    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 1rem;
 
-    .startBtn {
-      align-self: center;
-      margin-top: 3rem;
-      min-width: 300px;
-      max-width: 300px;
+      .startBtn {
+        margin-top: 0.5rem;
+      }
     }
   }
 }
