@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Dimmer, Loader } from 'semantic-ui-react';
+// import { Dimmer, Loader } from 'semantic-ui-react';
 
 export class LoaderWrapper extends Component {
     state = {
@@ -16,10 +16,10 @@ export class LoaderWrapper extends Component {
 
     render() {
         const { isLoading } = this.state;
-        return (
-            <Dimmer active={isLoading}>
-                <Loader>Carregando</Loader>
-            </Dimmer>
+        return (<></>
+            // <Dimmer active={isLoading}>
+            //     <Loader>Carregando</Loader>
+            // </Dimmer>
         );
     }
 }
