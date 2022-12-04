@@ -20,7 +20,7 @@ interface UserCredentials {
   updatedAt: string
 }
 
-export default function Home() {
+export default function Login() {
   const router = useRouter();
   const [login, setLogin] = useState("");
   const [pwd, setPwd] = useState("");
@@ -31,7 +31,7 @@ export default function Home() {
     try {
       const response = await toast.promise(validateUser, {
         pending: 'Autenticando',
-        success: 'Sem Bem Vindo',
+        success: 'Seja Bem-Vindo',
         error: 'Login ou senha inválidos'
       });
       const user: UserCredentials = response.data.user;
@@ -59,11 +59,11 @@ export default function Home() {
   }
 
   function sendToNext(): void {
-    console.log('Implement send to next');
+    router.push("/home");
   }
 
   return (
-    <div id="home" className={styles.pageContainer}>
+    <div id="login" className={styles.pageContainer}>
       <BigWhiteCard id="big-white-card" className={styles.bigWhiteCard}>
         <Heading fontSize="md" className={styles.cardHeading}>
           Bem vindo ao <span>M</span><span>K</span>-<span>Messenger</span>

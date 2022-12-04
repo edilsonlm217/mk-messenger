@@ -1,10 +1,22 @@
 .container {
     display: flex;
     flex-direction: column;
-    
+
     width: 500px;
     border-radius: var(--border-radius-lg);
     padding: 2rem;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    min-height: 580px;
+
+    .footer {
+        background-color: #e9e9e9;
+        margin-bottom: -2rem;
+        margin-right: -2rem;
+        margin-left: -2rem;
+        border-bottom-left-radius: var(--border-radius-lg);
+        border-bottom-right-radius: var(--border-radius-lg);
+        font-size: var(--font-size-xxxs);
+        padding: 1rem;
+        text-align: center;
+        font-weight: lighter;
+    }
 }

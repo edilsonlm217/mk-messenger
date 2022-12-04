@@ -4,7 +4,7 @@
   padding: 5px;
 
   .bigWhiteCard {
-    justify-content: center;
+    justify-content: flex-start;
 
     @media screen and (max-width: 768px) {
       box-shadow: none;

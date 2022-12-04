@@ -1,0 +1,27 @@
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+
+    .bigWhiteCard {
+        justify-content: flex-start;
+
+        .text {
+            margin-top: 0.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .qrCodeContainer {
+            align-self: center;
+            border: 1px solid red;
+            margin-bottom: 3rem;
+            width: 200px;
+            height: 200px;
+
+            img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    }
+}

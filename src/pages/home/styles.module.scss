@@ -1,0 +1,45 @@
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+
+    .bigWhiteCard {
+        justify-content: flex-start;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgb(195, 195, 195);
+            padding-bottom: 12px;
+
+            .text {
+                font-size: var(--font-size-xxxs);
+                line-height: 1.2rem;
+
+                span {
+                    font-size: var(--font-size-xxs);
+                    font-weight: 600;
+                }
+            }
+
+            .icon {
+                align-self: flex-end;
+                cursor: pointer;
+            }
+        }
+
+        .title {
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .startSession {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .cardContainer {
+            margin-bottom: 3rem;
+        }
+    }
+}
