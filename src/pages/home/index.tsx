@@ -14,19 +14,22 @@ import SessionCard from '../../components/SessionCard';
 import styles from './styles.module.scss';
 import { toast } from 'react-toastify';
 import QrCode from '../../components/QrCode';
+import Timer from '../../components/Timer';
 
 var promiseResolve: Function, promiseReject: Function;
 
 const Home: React.FC = () => {
     const [hasSession, setHasSession] = useState(false);
     const [qrCode, setQRcode] = useState<string | null>(null);
+    const [showTimer, setShowTimer] = useState(false);
+    const [initialTime, setInitialTime] = useState<number>(0);
 
     useEffect(() => {
         async function fetchSession(): Promise<void> {
             const sessionName = LocalStorage.getItem("client-session-name");
             const options = {
                 method: 'GET',
-                url: `http://localhost:3333/session/${sessionName}`
+                url: `http://191.252.113.144:3333/session/${sessionName}`
             };
             try {
                 await axios.request(options);
@@ -45,7 +48,7 @@ const Home: React.FC = () => {
     async function generateQrCode() {
         const sessionName = LocalStorage.getItem("client-session-name");
 
-        const socket = io(`http://localhost:3333`, {
+        const socket = io(`http://191.252.113.144:3333`, {
             query: {
                 sessionName: sessionName
             }
@@ -56,6 +59,8 @@ const Home: React.FC = () => {
             console.log("Já tem uma sessão onGoing");
             console.log("createdAt", createdAt);
             toast.warn("Você realizou uma tentativa recentemente, por favor aguarde!");
+            setShowTimer(true)
+            setInitialTime(createdAt);
             socket.disconnect();
         });
 
@@ -99,7 +104,6 @@ const Home: React.FC = () => {
             if (promiseReject) { promiseReject() }
             console.log('Servidor Desconectou');
         });
-
     }
 
     if (qrCode) {
@@ -144,11 +148,15 @@ const Home: React.FC = () => {
                         </div>
                         : <></>
                     }
+
+                    {showTimer
+                        ? <Timer initialTime={initialTime} />
+                        : <></>
+                    }
                 </BigWhiteCard>
             </div>
         );
     }
-
 }
 
 export default Home;

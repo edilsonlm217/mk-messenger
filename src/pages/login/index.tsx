@@ -59,7 +59,7 @@ const Login: React.FC = () => {
         try {
             const options = {
                 method: 'POST',
-                url: 'http://localhost:3333/auth',
+                url: 'http://191.252.113.144:3333/auth',
                 headers: { 'Content-Type': 'application/json' },
                 data: { login: login, password: pwd }
             };
