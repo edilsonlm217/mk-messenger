@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -26,6 +26,16 @@ export default function Login() {
   const [pwd, setPwd] = useState("");
   const [isFormInvalid, setIsFormInvalid] = useState(false);
 
+  useLayoutEffect(() => {
+    function redirectIfSessionNameExists(): void {
+      if (LocalStorage.sessionNameExists()) {
+        router.push("/home");
+      }
+    }
+
+    redirectIfSessionNameExists()
+  }, [router]);
+
   async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     try {
@@ -45,7 +55,7 @@ export default function Login() {
   function validateUser() {
     const options = {
       method: 'POST',
-      url: 'http://191.252.113.144:3333/auth',
+      url: 'http://localhost:3333/auth',
       headers: { 'Content-Type': 'application/json' },
       data: { login: login, password: pwd }
     };
