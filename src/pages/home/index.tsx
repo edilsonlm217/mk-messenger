@@ -15,21 +15,35 @@ import styles from './styles.module.scss';
 import { toast } from 'react-toastify';
 import QrCode from '../../components/QrCode';
 import Timer from '../../components/Timer';
+import { useRouter } from 'next/router';
 
 var promiseResolve: Function, promiseReject: Function;
 
 const Home: React.FC = () => {
+    const router = useRouter();
+
+    const [userName, setUserName] = useState("");
     const [hasSession, setHasSession] = useState(false);
     const [qrCode, setQRcode] = useState<string | null>(null);
     const [showTimer, setShowTimer] = useState(false);
     const [initialTime, setInitialTime] = useState<number>(0);
 
     useEffect(() => {
+        function redirectIfSessionNameIsEmpty(): void {
+            if (!LocalStorage.sessionNameExists()) {
+                router.push("/");
+            }
+        }
+
+        redirectIfSessionNameIsEmpty();
+    }, [router]);
+
+    useEffect(() => {
         async function fetchSession(): Promise<void> {
             const sessionName = LocalStorage.getItem("client-session-name");
             const options = {
                 method: 'GET',
-                url: `http://191.252.113.144:3333/session/${sessionName}`
+                url: `http://localhost:3333/session/${sessionName}`
             };
             try {
                 await axios.request(options);
@@ -38,6 +52,13 @@ const Home: React.FC = () => {
                 setHasSession(false);
             }
         }
+
+        function getUserNameFromStorage() {
+            const user = LocalStorage.getItem("client-name");
+            if (user) { setUserName(user) }
+        }
+
+        getUserNameFromStorage();
         fetchSession();
     }), [];
 
@@ -45,10 +66,15 @@ const Home: React.FC = () => {
         generateQrCode();
     }
 
-    async function generateQrCode() {
+    function handleLogout(): void {
+        LocalStorage.clear();
+        router.push("/");
+    }
+
+    async function generateQrCode(): Promise<void> {
         const sessionName = LocalStorage.getItem("client-session-name");
 
-        const socket = io(`http://191.252.113.144:3333`, {
+        const socket = io(`http://localhost:3333`, {
             query: {
                 sessionName: sessionName
             }
@@ -65,7 +91,6 @@ const Home: React.FC = () => {
         });
 
         socket.on("qr-code-generation-starting", () => {
-            console.log("Loading iniciado");
             toast.promise(
                 new Promise(function (resolve, reject) {
                     promiseResolve = resolve;
@@ -93,7 +118,6 @@ const Home: React.FC = () => {
         });
 
         socket.on("qr-code-generation-expired", () => {
-            console.log("QR Code não Lido");
             toast.warn("QR Code não lido. Tente novamente!");
             setQRcode(null);
             socket.disconnect();
@@ -102,7 +126,6 @@ const Home: React.FC = () => {
         socket.on("disconnect", () => {
             socket.disconnect();
             if (promiseReject) { promiseReject() }
-            console.log('Servidor Desconectou');
         });
     }
 
@@ -121,13 +144,14 @@ const Home: React.FC = () => {
                     <div className={styles.header}>
                         <Text body className={styles.text}>
                             Bem vindo, <br />
-                            <span>Oscarellys Daniela</span>
+                            <span>{userName}</span>
                         </Text>
                         <SignOut
                             size={22}
                             color="#292929"
                             weight="bold"
                             className={styles.icon}
+                            onClick={handleLogout}
                         />
                     </div>
 
