@@ -81,9 +81,6 @@ const Home: React.FC = () => {
         });
 
         socket.on("on-going-qr-code-generation-detected", ({ createdAt }) => {
-            console.log(sessionName);
-            console.log("Já tem uma sessão onGoing");
-            console.log("createdAt", createdAt);
             toast.warn("Você realizou uma tentativa recentemente, por favor aguarde!");
             setShowTimer(true)
             setInitialTime(createdAt);
@@ -105,14 +102,12 @@ const Home: React.FC = () => {
         });
 
         socket.on("qr-code-ready", ({ qrcode }) => {
-            console.log("QR Code Pronto");
             setQRcode(qrcode);
             promiseResolve();
         });
 
         socket.on("qr-code-successfully-read", () => {
-            console.log("QR Lido com Sucesso");
-            toast.success("Success Notification !");
+            toast.success("Sessão iniciada com sucesso");
             setQRcode(null);
             socket.disconnect();
         });
