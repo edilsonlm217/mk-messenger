@@ -6,15 +6,23 @@ class LocalStorage {
     }
 
     public getItem(keyName: string): string | null {
-        return window.localStorage.getItem(keyName);
+        if (typeof window !== "undefined") {
+            return window.localStorage.getItem(keyName);
+        } else {
+            return null;
+        }
     }
 
-    public removeItem(keyName: string) {
+    public removeItem(keyName: string): void {
         window.localStorage.removeItem(keyName);
     }
 
     public sessionNameExists(): boolean {
         return this.getItem("client-session-name") ? true : false;
+    }
+
+    public clear(): void {
+        window.localStorage.clear();
     }
 }
 
