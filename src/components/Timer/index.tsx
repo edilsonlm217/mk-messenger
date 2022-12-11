@@ -30,7 +30,7 @@ const Timer: React.FC<ComponentProps> = (props) => {
         <>
             {minutes >= 0 &&
                 <div className={styles.timer}>
-                    Tente novamente em: <span>{minutes}:{seconds}</span>
+                    Tente novamente em: <span>{minutes}:{seconds.toLocaleString("pt-BR", { minimumIntegerDigits: 2 })}</span>
                 </div>
             }
         </>
