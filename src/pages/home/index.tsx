@@ -27,6 +27,7 @@ const Home: React.FC = () => {
     const [qrCode, setQRcode] = useState<string | null>(null);
     const [showTimer, setShowTimer] = useState(false);
     const [initialTime, setInitialTime] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         function redirectIfSessionNameIsEmpty(): void {
@@ -88,6 +89,7 @@ const Home: React.FC = () => {
         });
 
         socket.on("qr-code-generation-starting", () => {
+            setIsLoading(true);
             toast.promise(
                 new Promise(function (resolve, reject) {
                     promiseResolve = resolve;
@@ -102,6 +104,7 @@ const Home: React.FC = () => {
         });
 
         socket.on("qr-code-ready", ({ qrcode }) => {
+            setIsLoading(false);
             setQRcode(qrcode);
             promiseResolve();
         });
@@ -114,6 +117,7 @@ const Home: React.FC = () => {
 
         socket.on("qr-code-generation-expired", () => {
             toast.warn("QR Code não lido. Tente novamente!");
+            setIsLoading(false);
             setQRcode(null);
             socket.disconnect();
         });
@@ -163,7 +167,9 @@ const Home: React.FC = () => {
 
                     {!hasSession
                         ? <div className={styles.startSession}>
-                            <Button onClick={handleStartSession}>Iniciar sessão</Button>
+                            <Button onClick={handleStartSession} isLoading={isLoading}>
+                                Iniciar sessão
+                            </Button>
                         </div>
                         : <></>
                     }
