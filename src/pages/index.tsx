@@ -22,9 +22,12 @@ interface UserCredentials {
 
 export default function Login() {
   const router = useRouter();
+
   const [login, setLogin] = useState("");
   const [pwd, setPwd] = useState("");
   const [isFormInvalid, setIsFormInvalid] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useLayoutEffect(() => {
     function redirectIfSessionNameExists(): void {
@@ -38,6 +41,7 @@ export default function Login() {
 
   async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await toast.promise(validateUser, {
         pending: 'Autenticando',
@@ -47,7 +51,9 @@ export default function Login() {
       const user: UserCredentials = response.data.user;
       saveUser(user);
       sendToNext();
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setIsFormInvalid(true);
     }
   }
@@ -100,7 +106,7 @@ export default function Login() {
           />
 
           <div className={styles.startBtn}>
-            <Button>Começar</Button>
+            <Button isLoading={isLoading}>Começar</Button>
           </div>
         </form>
 
